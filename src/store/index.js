@@ -1,49 +1,18 @@
 "use client";
 
 import { create } from "zustand";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios from "axios";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import { Router } from "next/router";
 
-interface User {
-  id: string;
-  email: string;
-  name?: string;
-}
-
-interface Product {
-  id: string;
-  name: string;
-}
-
-interface Department {
-  id: string;
-  name: string;
-}
-
-interface AuthStoreState {
-  departments: Department[];
-  loading: boolean;
-  serverError: string;
-  user: User | null;
-  products: Product[];
-  signupWithCredential: (data: FormData, router: Router) => Promise<void>;
-  loginWithCredential: (data: { email: string; password: string }, router: Router) => Promise<void>;
-  logout: (router: Router) => Promise<void>;
-  fetchproducts: () => Promise<void>;
-  fetchUsers: (userId: string) => Promise<void>;
-  handleOAuth: (provider: 'google' | 'github' | 'facebook') => Promise<void>;
-}
-
-const useAuthStore = create<AuthStoreState>((set) => ({
+const useAuthStore = create((set) => ({
   departments: [],
   loading: false,
   serverError: "",
   user: null,
   products: [],
 
-  signupWithCredential: async (data: FormData, router: Router) => {
+  signupWithCredential: async (data, router) => {
     set({ loading: true });
     try {
       await axios.post("/api/auth/signup", data, {
@@ -52,8 +21,7 @@ const useAuthStore = create<AuthStoreState>((set) => ({
       toast.success("Signup Successfully");
       router.push("/login");
     } catch (error) {
-      const axiosError = error as AxiosError;
-      if (axiosError.response && axiosError.response.status === 409) {
+      if (error.response && error.response.status === 409) {
         toast.error("Email already exists. Please use a different email.");
       } else {
         set({ serverError: "Failed to sign up. Please try again." });
@@ -62,11 +30,10 @@ const useAuthStore = create<AuthStoreState>((set) => ({
       set({ loading: false });
     }
   },
-
-  loginWithCredential: async (data: { email: string; password: string }, router: Router) => {
+  loginWithCredential: async (data, router) => {
     set({ loading: true });
     try {
-      const res: AxiosResponse<{ token: string; userId: string }> = await axios.post("/api/auth/login", data, {
+      const res = await axios.post("/api/auth/login", data, {
         headers: { "Content-Type": "application/json" },
       });
 
@@ -77,20 +44,19 @@ const useAuthStore = create<AuthStoreState>((set) => ({
         toast.success("Login successful");
       }
     } catch (error) {
-      const axiosError = error as AxiosError;
-      if (axiosError.response && axiosError.response.status === 401) {
+      if (error.response && error.response.status === 401) {
         toast.error("Invalid Credentials");
       } else {
-        toast.error("Something went Wrong!");
+        toast.error("Something want Wrong!");
       }
     } finally {
       set({ loading: false });
     }
   },
 
-  logout: async (router: Router) => {
+  logout: async (router) => {
     try {
-      const res: AxiosResponse = await axios.get("/api/auth/logout", {
+      const res = await axios.get("/api/auth/logout", {
         withCredentials: true,
       });
       if (res.status === 200) {
@@ -107,23 +73,22 @@ const useAuthStore = create<AuthStoreState>((set) => ({
 
   fetchproducts: async () => {
     try {
-      const response: AxiosResponse<Product[]> = await axios.get(`/api/products`);
+      const response = await axios.get(`/api/products`);
       set({ products: response.data });
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   },
-
-  fetchUsers: async (userId: string) => {
+  fetchUsers: async (userId) => {
     try {
-      const response: AxiosResponse<User> = await axios.get(`/api/user/${userId}`);
+      const response = await axios.get(`/api/user/${userId}`);
       set({ user: response.data });
     } catch (error) {
       console.error("Error fetching user:", error);
     }
   },
 
-  handleOAuth: async (provider: 'google' | 'github' | 'facebook') => {
+  handleOAuth: async (provider) => {
     const providers = {
       google: "/api/auth/google",
       github: "http://localhost:3000/api/auth/github",

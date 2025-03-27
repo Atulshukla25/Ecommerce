@@ -41,14 +41,13 @@ export default function Navbar({ user }: NavbarProps) {
         </Link>
 
         <div className="flex items-center space-x-6 text-lg">
-          {/* Search Bar - Positioned before Cart */}
           <form onSubmit={handleSearch} className="relative">
             <input
               type="text"
               placeholder="Search products..."
               value={searchQuery}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
-              className="px-4 py-2 rounded-lg text-black focus:outline-none"
+              className="px-4 py-2 rounded-lg text-black focus:outline-none placeholder:text-white"
             />
           </form>
 
