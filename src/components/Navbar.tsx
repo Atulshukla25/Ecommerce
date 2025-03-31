@@ -36,7 +36,7 @@ export default function Navbar({ user }: NavbarProps) {
   return (
     <nav className="bg-gradient-to-r from-purple-600 to-indigo-700 text-white p-4 shadow-md fixed w-full top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="text-2xl font-extrabold tracking-wide">
+        <Link href="/" className="text-2xl font-extrabold tracking-wide italic">
           Pocket<span className="text-yellow-300">Mall</span>
         </Link>
 
@@ -62,35 +62,37 @@ export default function Navbar({ user }: NavbarProps) {
               </button>
 
               {isPopupOpen && (
-                <div className="absolute right-0 mt-3 w-84 bg-white text-black p-4 shadow-lg rounded-md border border-gray-200 animate-fade-in">
-                  <h3 className="text-lg font-semibold text-gray-800">
-                    User Profile
-                  </h3>
-                  <p className="mt-2">
-                    <strong>Name:</strong> {user.name}
+                <div className="absolute right-[-108px] mt-5 w-85 bg-gradient-to-br from-white via-gray-100 to-gray-200 text-black p-6 shadow-2xl rounded-lg border border-gray-300 animate-fade-in">
+                <h3 className="text-xl font-bold text-gray-700 mb-4 border-b border-gray-300 pb-2">
+                  User Profile
+                </h3>
+                <div className="space-y-3">
+                  <p>
+                    <strong>Name:</strong> <span className="text-gray-900">{user.name}</span>
                   </p>
                   <p>
-                    <strong>Email:</strong> {user.email}
+                    <strong>Email:</strong> <span className="text-gray-900">{user.email}</span>
                   </p>
                   <p>
-                    <strong>Gender:</strong> {user.gender}
+                    <strong>Gender:</strong> <span className="text-gray-900">{user.gender}</span>
                   </p>
-
-                  <div className="mt-4 space-y-2">
-                    <button
-                      onClick={() => logout(router)}
-                      className="w-full bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
-                    >
-                      Logout
-                    </button>
-                    <button
-                      onClick={togglePopup}
-                      className="w-full bg-gray-200 text-black px-4 py-2 rounded-md hover:bg-gray-300 transition"
-                    >
-                      Close
-                    </button>
-                  </div>
                 </div>
+              
+                <div className="mt-6 space-y-3">
+                  <button
+                    onClick={() => logout(router)}
+                    className="w-full bg-red-500 text-white px-5 py-2 rounded-lg shadow-md hover:bg-red-600 hover:shadow-lg transition-all transform hover:scale-105"
+                  >
+                    Logout
+                  </button>
+                  <button
+                    onClick={togglePopup}
+                    className="w-full bg-gray-200 text-gray-700 px-5 py-2 rounded-lg shadow-md hover:bg-gray-300 hover:shadow-lg transition-all transform hover:scale-105"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
               )}
             </div>
           ) : (

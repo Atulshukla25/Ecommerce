@@ -38,7 +38,7 @@ export default function Dashboard() {
     {user && (
       <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-6 rounded-2xl shadow-2xl transition-transform transform hover:scale-105">
         <h2 className="text-3xl font-bold text-white animate-bounce">
-          Hello, {user.name} 👋
+          Hello, {user.name}👋
         </h2>
         <p className="text-sm text-gray-200 mt-2">
           We're thrilled to have you here! Explore and enjoy your journey with us.
