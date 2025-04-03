@@ -19,7 +19,7 @@ interface NavbarProps {
 export default function Navbar({ user }: NavbarProps) {
   const router = useRouter();
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
-  const { logout } = useAuthStore();
+  const { logout, cart } = useAuthStore();
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const togglePopup = (): void => {
@@ -41,18 +41,20 @@ export default function Navbar({ user }: NavbarProps) {
         </Link>
 
         <div className="flex items-center space-x-6 text-lg">
-          <form onSubmit={handleSearch} className="relative">
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={searchQuery}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
-              className="px-4 py-2 rounded-lg text-black focus:outline-none placeholder:text-white"
-            />
-          </form>
+          <Link href="/products" className="hover:text-yellow-300 transition">
+            Product
+          </Link>
 
-          <Link href="/cart" className="hover:text-yellow-300 transition">
+          <Link
+            href="/cart"
+            className="relative hover:text-yellow-300 transition"
+          >
             Cart
+            {cart.length > 0 && (
+              <span className="absolute -top-2 -right-4 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                {cart.length}
+              </span>
+            )}
           </Link>
 
           {user ? (
@@ -63,36 +65,39 @@ export default function Navbar({ user }: NavbarProps) {
 
               {isPopupOpen && (
                 <div className="absolute right-[-108px] mt-5 w-85 bg-gradient-to-br from-white via-gray-100 to-gray-200 text-black p-6 shadow-2xl rounded-lg border border-gray-300 animate-fade-in">
-                <h3 className="text-xl font-bold text-gray-700 mb-4 border-b border-gray-300 pb-2">
-                  User Profile
-                </h3>
-                <div className="space-y-3">
-                  <p>
-                    <strong>Name:</strong> <span className="text-gray-900">{user.name}</span>
-                  </p>
-                  <p>
-                    <strong>Email:</strong> <span className="text-gray-900">{user.email}</span>
-                  </p>
-                  <p>
-                    <strong>Gender:</strong> <span className="text-gray-900">{user.gender}</span>
-                  </p>
+                  <h3 className="text-xl font-bold text-gray-700 mb-4 border-b border-gray-300 pb-2">
+                    User Profile
+                  </h3>
+                  <div className="space-y-3">
+                    <p>
+                      <strong>Name:</strong>{" "}
+                      <span className="text-gray-900">{user.name}</span>
+                    </p>
+                    <p>
+                      <strong>Email:</strong>{" "}
+                      <span className="text-gray-900">{user.email}</span>
+                    </p>
+                    <p>
+                      <strong>Gender:</strong>{" "}
+                      <span className="text-gray-900">{user.gender}</span>
+                    </p>
+                  </div>
+
+                  <div className="mt-6 space-y-3">
+                    <button
+                      onClick={() => logout(router)}
+                      className="w-full bg-red-500 text-white px-5 py-2 rounded-lg shadow-md hover:bg-red-600 hover:shadow-lg transition-all transform hover:scale-105"
+                    >
+                      Logout
+                    </button>
+                    <button
+                      onClick={togglePopup}
+                      className="w-full bg-gray-200 text-gray-700 px-5 py-2 rounded-lg shadow-md hover:bg-gray-300 hover:shadow-lg transition-all transform hover:scale-105"
+                    >
+                      Close
+                    </button>
+                  </div>
                 </div>
-              
-                <div className="mt-6 space-y-3">
-                  <button
-                    onClick={() => logout(router)}
-                    className="w-full bg-red-500 text-white px-5 py-2 rounded-lg shadow-md hover:bg-red-600 hover:shadow-lg transition-all transform hover:scale-105"
-                  >
-                    Logout
-                  </button>
-                  <button
-                    onClick={togglePopup}
-                    className="w-full bg-gray-200 text-gray-700 px-5 py-2 rounded-lg shadow-md hover:bg-gray-300 hover:shadow-lg transition-all transform hover:scale-105"
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
               )}
             </div>
           ) : (

@@ -11,23 +11,6 @@ const Footer: React.FC = () => {
           </span>
           . All rights reserved.
         </p>
-        <div className="mt-2 flex justify-center space-x-4">
-          <a
-            href="#"
-            className="text-gray-400 hover:text-amber-400 transition duration-300"
-          >
-            Privacy Policy
-          </a>
-          <a
-            href="#"
-            className="text-gray-400 hover:text-amber-400 transition duration-300"
-          >
-            Terms of Service
-          </a>
-        </div>
-        <p className="text-xs text-gray-500 mt-2">
-          Crafted with ❤️ by the PocketMall Team
-        </p>
       </div>
     </footer>
   );

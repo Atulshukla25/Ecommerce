@@ -11,6 +11,7 @@ const useAuthStore = create((set) => ({
   serverError: "",
   user: null,
   products: [],
+  cart: [],
 
   signupWithCredential: async (data, router) => {
     set({ loading: true });
@@ -40,7 +41,7 @@ const useAuthStore = create((set) => ({
       if (res.status === 200) {
         Cookies.set("token", res.data.token);
         Cookies.set("userId", res.data.userId);
-        router.push("/products");
+        router.push("/dashboard");
         toast.success("Login successful");
       }
     } catch (error) {
@@ -73,7 +74,7 @@ const useAuthStore = create((set) => ({
 
   fetchproducts: async () => {
     try {
-      const response = await axios.get(`/api/products`);
+      const response = await axios.get(`/api/dashboard`);
       set({ products: response.data });
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -99,6 +100,49 @@ const useAuthStore = create((set) => ({
     } catch (error) {
       console.error("Login failed", error);
     }
+  },
+
+  fetchproducts: async () => {
+    set({ loading: true });
+    try {
+      const response = await axios.get("/api/products");
+      set({ products: response.data });
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      toast.error("Failed to load products");
+    } finally {
+      set({ loading: false });
+    }
+  },
+  addToCart: (product) => {
+    set((state) => {
+      const existingItem = state.cart.find((item) => item.id === product.id);
+      if (existingItem) {
+        return {
+          cart: state.cart.map((item) =>
+            item.id === product.id
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          ),
+        };
+      } else {
+        return { cart: [...state.cart, { ...product, quantity: 1 }] };
+      }
+    });
+  },
+
+  updateCartItem: (id, newQuantity) => {
+    set((state) => ({
+      cart: state.cart.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      ),
+    }));
+  },
+
+  removeCartItem: (id) => {
+    set((state) => ({
+      cart: state.cart.filter((item) => item.id !== id),
+    }));
   },
 }));
 

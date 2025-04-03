@@ -84,7 +84,7 @@ export async function GET(req: Request): Promise<Response> {
       { expiresIn: "7d" }
     );
 
-    const response = NextResponse.redirect("http://localhost:3000/products");
+    const response = NextResponse.redirect("http://localhost:3000/dashboard");
 
     response.cookies.set("token", token, {
       httpOnly: true,
