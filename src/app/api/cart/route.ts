@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
-let cart: any[] = []; // Temporary storage for cart items (Use a database in production)
+let cart: any[] = []; 
 
-// GET - Fetch the cart
 export async function GET() {
   try {
     return NextResponse.json(cart, { status: 200 });
@@ -12,7 +11,6 @@ export async function GET() {
   }
 }
 
-// POST - Add to cart
 export async function POST(req: Request) {
   try {
     const { id, name, description, price, image, quantity } = await req.json();
@@ -25,14 +23,13 @@ export async function POST(req: Request) {
       cart.push({ id, name, description, price, image, quantity: quantity || 1 });
     }
 
-    (await cookies()).set("cart", JSON.stringify(cart)); // Save cart in cookies (optional)
+    (await cookies()).set("cart", JSON.stringify(cart));
     return NextResponse.json({ message: "Item added to cart", cart }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: "Failed to add item to cart" }, { status: 500 });
   }
 }
 
-// PUT - Update cart item quantity
 export async function PUT(req: Request) {
   try {
     const { id, quantity } = await req.json();
@@ -47,7 +44,6 @@ export async function PUT(req: Request) {
   }
 }
 
-// DELETE - Remove item from cart
 export async function DELETE(req: Request) {
   try {
     const { id } = await req.json();

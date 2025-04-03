@@ -8,7 +8,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: "Invalid request" }, { status: 400 });
     }
 
-    // Simulate order processing (save to DB if needed)
     console.log("Order Placed:", { userId, cart });
 
     return NextResponse.json({ message: "Order placed successfully!" });

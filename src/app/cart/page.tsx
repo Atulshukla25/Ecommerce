@@ -16,7 +16,6 @@ export default function CartPage() {
     }
   }, [user, router]);
 
-  // Calculate total price
   const totalPrice = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0

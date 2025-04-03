@@ -6,7 +6,7 @@ import useAuthStore from "../../store/index";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import toast styles
+import "react-toastify/dist/ReactToastify.css";
 
 interface Product {
   id: number;
@@ -19,7 +19,7 @@ interface Product {
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const router = useRouter();
-  const { user, fetchUsers, addToCart, cart } = useAuthStore(); // Get cart from store
+  const { user, fetchUsers, addToCart, cart } = useAuthStore();
 
   useEffect(() => {
     const userId = Cookies.get("userId");
@@ -49,7 +49,6 @@ export default function ProductsPage() {
     fetchProducts();
   }, [fetchUsers]);
 
-  // Function to handle Add to Cart with Quantity Restriction
   const handleAddToCart = (product: Product) => {
     const isAlreadyInCart = cart.some((item) => item.id === product.id);
 
@@ -64,7 +63,7 @@ export default function ProductsPage() {
         theme: "dark",
       });
     } else {
-      addToCart({ ...product, quantity: 1 }); // Add with initial quantity 1
+      addToCart({ ...product, quantity: 1 });
       toast.success(`${product.name} added to cart!`, {
         position: "top-right",
         autoClose: 2000,
