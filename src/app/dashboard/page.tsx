@@ -25,14 +25,14 @@ export default function Dashboard() {
   }, [router, fetchUsers]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-gray-900 to-black text-white flex flex-col items-center justify-center">
+    <div className="min-h-screen bg-blue-50 text-white flex flex-col items-center justify-center">
   <Navbar user={user} />
 
   <div className="flex flex-col items-center text-center px-6">
     <h1 className="text-6xl font-extrabold text-yellow-300 mb-6 drop-shadow-2xl animate-pulse">
-      Welcome to <span className="text-pink-500">Pocket Mall</span>
+      Welcome to <span className="text-pink-500"><i>PocketMall</i></span>
     </h1>
-    <p className="text-lg text-gray-300 mb-8 max-w-xl leading-relaxed">
+    <p className="text-lg text-gray-800 mb-8 max-w-xl leading-relaxed">
       Your ultimate destination for shopping! Discover amazing products and enjoy an effortless shopping experience.
     </p>
     {user && (

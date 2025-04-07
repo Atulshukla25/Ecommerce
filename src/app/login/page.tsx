@@ -40,7 +40,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-400 to-indigo-500">
+    <div className="flex items-center justify-center min-h-screen bg-blue-200">
       <div className="w-full max-w-xl p-8 space-y-6 bg-white shadow-2xl rounded-3xl border border-gray-300">
         <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-6">
           Login to <span className="text-blue-500">Pocket Mall</span>
@@ -92,7 +92,7 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="w-full py-3 bg-gradient-to-r from-green-500 to-green-700 text-white font-semibold rounded-lg shadow-md hover:from-green-600 hover:to-green-800 transition duration-300 focus:ring-2 focus:ring-green-400"
+            className="w-full py-3 bg-gradient-to-r from-green-700 to-green-700 text-white font-semibold rounded-lg shadow-md hover:from-green-600 hover:to-green-800 transition duration-300 focus:ring-2 focus:ring-green-400"
           >
             LOGIN
           </button>

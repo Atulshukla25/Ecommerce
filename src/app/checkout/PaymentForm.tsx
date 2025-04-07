@@ -42,7 +42,7 @@ export default function PaymentForm() {
       onSubmit={handlePayment}
       className="bg-gray-800 p-6 rounded-lg shadow-lg"
     >
-      <h2 className="text-2xl font-bold text-yellow-300 mb-4">Payment</h2>
+      <h2 className="text-2xl font-bold text-yellow-400 mb-4">Payment</h2>
 
       <input
         type="text"

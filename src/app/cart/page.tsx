@@ -22,9 +22,9 @@ export default function CartPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-blue-50 text-white">
       <div className="container mx-auto py-12">
-        <h1 className="text-4xl font-bold text-center text-yellow-300 mt-10">
+        <h1 className="text-4xl font-bold text-center text-yellow-400 mt-10">
           Your Cart
         </h1>
 
@@ -33,7 +33,7 @@ export default function CartPage() {
             {cart.map((item) => (
               <div
                 key={item.id}
-                className="flex justify-between items-center bg-gray-800 p-6 rounded-lg shadow-lg"
+                className="flex justify-between items-center bg-gray-600 p-6 rounded-lg shadow-lg"
               >
                 <div className="flex items-center gap-4">
                   <img
@@ -79,7 +79,7 @@ export default function CartPage() {
             ))}
 
             <div className="mt-8 text-right">
-              <h2 className="text-2xl font-bold text-white">
+              <h2 className="text-2xl font-bold text-black">
                 Total: ₹{totalPrice.toFixed(2)}
               </h2>
               <Link href="/checkout">

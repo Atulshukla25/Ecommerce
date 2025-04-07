@@ -19,9 +19,9 @@ export default function CheckoutPage() {
   }, [user, cart, router]);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-blue-50 text-white">
       <div className="container mx-auto py-12">
-        <h1 className="text-4xl font-bold text-center text-yellow-300 mt-10">
+        <h1 className="text-4xl font-bold text-center text-yellow-400 mt-10">
           Checkout
         </h1>
 

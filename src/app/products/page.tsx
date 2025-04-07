@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import useAuthStore from "../../store/index";
-import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,7 +17,6 @@ interface Product {
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
-  const router = useRouter();
   const { user, fetchUsers, addToCart, cart } = useAuthStore();
 
   useEffect(() => {
@@ -77,10 +75,10 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-blue-50 text-white">
       <Navbar user={user} />
       <div className="container mx-auto py-12">
-        <h1 className="text-4xl font-bold text-center text-yellow-300 mt-10">
+        <h1 className="text-4xl font-bold text-center text-yellow-400 mt-10">
           Our Products
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 mt-6">

@@ -26,13 +26,6 @@ export default function Navbar({ user }: NavbarProps) {
     setIsPopupOpen(!isPopupOpen);
   };
 
-  const handleSearch = (e: React.FormEvent): void => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
-    }
-  };
-
   return (
     <nav className="bg-gradient-to-r from-purple-600 to-indigo-700 text-white p-4 shadow-md fixed w-full top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">

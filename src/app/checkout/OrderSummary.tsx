@@ -12,7 +12,7 @@ export default function OrderSummary() {
 
   return (
     <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold text-yellow-300 mb-4">Order Summary</h2>
+      <h2 className="text-2xl font-bold text-yellow-400 mb-4">Order Summary</h2>
 
       {cart.length > 0 ? (
         <div className="space-y-4">

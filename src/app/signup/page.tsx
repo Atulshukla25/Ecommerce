@@ -12,7 +12,6 @@ import { SubmitHandler } from "react-hook-form";
 
 type SignupFormData = z.infer<typeof signupSchema>;
 
-
 export default function Signup() {
   const router = useRouter();
   const {
@@ -36,7 +35,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-400 to-indigo-500">
+    <div className="flex items-center justify-center min-h-screen bg-blue-200">
       <div className="w-full max-w-xl p-8 space-y-6 bg-white shadow-2xl rounded-3xl border border-gray-300">
         <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-6">
           Join <span className="text-blue-500">Pocket Mall</span>
