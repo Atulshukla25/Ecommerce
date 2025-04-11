@@ -11,28 +11,41 @@ export default function OrderSummary() {
   );
 
   return (
-    <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold text-yellow-400 mb-4">Order Summary</h2>
+    <div className="bg-gray-800 p-6 rounded-2xl shadow-2xl">
+      <h2 className="text-2xl font-extrabold text-yellow-400 mb-6">
+        Order Summary
+      </h2>
 
       {cart.length > 0 ? (
-        <div className="space-y-4">
+        <div className="space-y-5">
           {cart.map((item) => (
-            <div key={item.id} className="flex justify-between items-center">
-              <p className="text-white">
-                {item.name} ({item.quantity}x)
+            <div
+              key={item.id}
+              className="flex justify-between items-center text-white"
+            >
+              <p className="font-medium">
+                {item.name}{" "}
+                <span className="text-sm text-gray-300">
+                  ({item.quantity ?? 1}x)
+                </span>
               </p>
-              <p className="text-green-400">
+              <p className="font-semibold text-green-400">
                 ₹{item.price * (item.quantity ?? 1)}
               </p>
             </div>
           ))}
+
           <hr className="my-4 border-gray-600" />
-          <h3 className="text-xl font-bold text-white">
-            Total: ₹{totalPrice.toFixed(2)}
-          </h3>
+
+          <div className="flex justify-between items-center text-white">
+            <h3 className="text-xl font-bold">Total:</h3>
+            <span className="text-xl font-bold text-green-400">
+              ₹{totalPrice.toFixed(2)}
+            </span>
+          </div>
         </div>
       ) : (
-        <p className="text-gray-400">No items in cart.</p>
+        <p className="text-gray-400 text-sm">No items in cart.</p>
       )}
     </div>
   );

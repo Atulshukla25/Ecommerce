@@ -40,39 +40,51 @@ export default function PaymentForm() {
   return (
     <form
       onSubmit={handlePayment}
-      className="bg-gray-800 p-6 rounded-lg shadow-lg"
+      className="bg-gray-800 p-6 rounded-2xl shadow-2xl w-full max-w-md mx-auto"
     >
-      <h2 className="text-2xl font-bold text-yellow-400 mb-4">Payment</h2>
+      <h2 className="text-2xl font-extrabold text-yellow-400 mb-6">
+        Payment Details
+      </h2>
 
-      <input
-        type="text"
-        placeholder="Card Number"
-        className="w-full p-3 rounded-md text-white mb-4"
-        required
-      />
-      <input
-        type="text"
-        placeholder="Card Holder Name"
-        className="w-full p-3 rounded-md text-white mb-4"
-        required
-      />
-      <input
-        type="text"
-        placeholder="Expiration Date (MM/YY)"
-        className="w-full p-3 rounded-md text-white mb-4"
-        required
-      />
-      <input
-        type="text"
-        placeholder="CVV"
-        className="w-full p-3 rounded-md text-white mb-4"
-        required
-      />
+      <div className="space-y-4">
+        <input
+          type="text"
+          placeholder="Card Number"
+          aria-label="Card Number"
+          className="w-full p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Card Holder Name"
+          aria-label="Card Holder Name"
+          className="w-full p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Expiration Date (MM/YY)"
+          aria-label="Expiration Date"
+          className="w-full p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          required
+        />
+        <input
+          type="text"
+          placeholder="CVV"
+          aria-label="CVV"
+          className="w-full p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          required
+        />
+      </div>
 
       <button
         type="submit"
-        className="w-full bg-green-500 text-white px-6 py-3 rounded-md shadow-md hover:bg-green-600 transition"
         disabled={loading}
+        className={`mt-6 w-full px-6 py-3 rounded-md shadow-md font-semibold transition ${
+          loading
+            ? "bg-gray-500 cursor-not-allowed"
+            : "bg-green-500 hover:bg-green-600 text-white"
+        }`}
       >
         {loading ? "Processing..." : "Pay & Place Order"}
       </button>

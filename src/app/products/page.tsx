@@ -17,6 +17,7 @@ interface Product {
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const { user, fetchUsers, addToCart, cart } = useAuthStore();
 
   useEffect(() => {
@@ -29,17 +30,12 @@ export default function ProductsPage() {
       try {
         const response = await fetch("/api/products");
         const data = await response.json();
-
-        console.log("Fetched Products:", data);
-
         if (Array.isArray(data)) {
           setProducts(data);
         } else {
-          console.error("Unexpected API response:", data);
           setProducts([]);
         }
       } catch (error) {
-        console.error("Error fetching products:", error);
         setProducts([]);
       }
     }
@@ -49,67 +45,60 @@ export default function ProductsPage() {
 
   const handleAddToCart = (product: Product) => {
     const isAlreadyInCart = cart.some((item) => item.id === product.id);
-
     if (isAlreadyInCart) {
-      toast.warning(`${product.name} is already in the cart!`, {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-      });
+      toast.warning(`${product.name} is already in the cart!`);
     } else {
       addToCart({ ...product, quantity: 1 });
-      toast.success(`${product.name} added to cart!`, {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-      });
+      toast.success(`${product.name} added to cart!`);
     }
   };
 
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="min-h-screen bg-blue-50 text-white">
-      <Navbar user={user} />
-      <div className="container mx-auto py-12">
-        <h1 className="text-4xl font-bold text-center text-yellow-400 mt-10">
-          Our Products
+    <div className="min-h-screen bg-gradient-to-tr from-blue-100 to-blue-200 text-gray-800">
+      <Navbar
+        user={user}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
+      <div className="container mx-auto px-4 py-12">
+        <h1 className="text-5xl font-extrabold text-center text-blue-800 mb-8 mt-10">
+          Explore Our Products
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 mt-6">
-          {products.length > 0 ? (
-            products.map((product) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => (
               <div
                 key={product.id}
-                className="bg-gray-800 p-6 rounded-lg shadow-lg transform transition duration-500 hover:scale-105"
+                className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transform transition duration-300 hover:scale-[1.02]"
               >
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-48 object-cover rounded-md mb-4"
+                  className="w-full h-52 object-cover rounded-xl mb-4"
                 />
-                <h2 className="text-2xl font-semibold text-white mb-2">
+                <h2 className="text-xl font-bold text-gray-900 mb-2">
                   {product.name}
                 </h2>
-                <p className="text-gray-400 mb-4">{product.description}</p>
-                <p className="text-lg font-bold text-green-400">
+                <p className="text-gray-600 text-sm mb-4">
+                  {product.description}
+                </p>
+                <p className="text-lg font-semibold text-green-600 mb-4">
                   ₹{product.price}
                 </p>
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className="w-full bg-yellow-500 text-black px-4 py-2 mt-4 rounded-lg shadow-md hover:bg-yellow-600 hover:shadow-lg transition-all transform hover:scale-105"
+                  className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-all"
                 >
                   Add to Cart
                 </button>
               </div>
             ))
           ) : (
-            <p className="text-center text-gray-400 col-span-3">
+            <p className="text-center text-gray-500 col-span-3">
               No products available.
             </p>
           )}

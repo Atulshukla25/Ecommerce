@@ -14,13 +14,18 @@ interface User {
 
 interface NavbarProps {
   user: User | null;
+  searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function Navbar({ user }: NavbarProps) {
+export default function Navbar({
+  user,
+  searchQuery,
+  setSearchQuery,
+}: NavbarProps) {
   const router = useRouter();
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const { logout, cart } = useAuthStore();
-  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const togglePopup = (): void => {
     setIsPopupOpen(!isPopupOpen);
@@ -28,12 +33,19 @@ export default function Navbar({ user }: NavbarProps) {
 
   return (
     <nav className="bg-gradient-to-r from-purple-600 to-indigo-700 text-white p-4 shadow-md fixed w-full top-0 z-50">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto flex flex-wrap justify-between items-center gap-4">
         <Link href="/" className="text-2xl font-extrabold tracking-wide italic">
           Pocket<span className="text-yellow-300">Mall</span>
         </Link>
 
         <div className="flex items-center space-x-6 text-lg">
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="px-3 py-1 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-white w-full sm:w-auto"
+          />
           <Link href="/products" className="hover:text-yellow-300 transition">
             Product
           </Link>
