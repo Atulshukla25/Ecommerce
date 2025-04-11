@@ -89,7 +89,7 @@ export default function ProductsPage() {
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="px-4 py-2 rounded-lg border border-blue-300 text-blue-700 bg-white shadow-sm"
+            className="px-4 py-2 rounded-lg border border-blue-300 font-bold text-blue-700 bg-white shadow-sm"
           >
             {categories.map((cat) => (
               <option key={cat} value={cat}>
@@ -101,14 +101,14 @@ export default function ProductsPage() {
           {selectedCategory !== "All" && (
             <button
               onClick={() => setSelectedCategory("All")}
-              className="px-4 py-2 rounded-lg bg-red-100 text-red-600 border border-red-300 hover:bg-red-200 transition-all text-sm font-medium"
+              className="px-3 py-1 rounded-lg bg-red-100 text-red-600 border border-red-300 hover:bg-red-200 transition-all font-bold"
             >
               Clear Filter
             </button>
           )}
         </div>
 
-        <h2 className="text-2xl font-bold text-center text-blue-700 mb-4">
+        <h2 className="text-2xl font-bold text-blue-700 mb-4">
           {selectedCategory === "All"
             ? "All Products"
             : `Category: ${selectedCategory}`}

@@ -5,6 +5,10 @@ import { useRouter } from "next/navigation";
 import { FaUserCircle } from "react-icons/fa";
 import useAuthStore from "../store/index";
 import React from "react";
+import { AiFillProduct } from "react-icons/ai";
+import { FaCartArrowDown } from "react-icons/fa";
+import { FcShop } from "react-icons/fc";
+import { FaSearch } from "react-icons/fa";
 
 interface User {
   name: string;
@@ -36,28 +40,37 @@ export default function Navbar({
       <div className="container mx-auto flex flex-wrap justify-between items-center gap-4">
         <Link
           href="/dashboard"
-          className="text-2xl font-extrabold tracking-wide italic"
+          className="text-2xl font-extrabold tracking-wide italic flex gap-2.5  items-center"
         >
-          Pocket<span className="text-yellow-300">Mall</span>
+          <FcShop className="mb-1 text-4xl" />
+          <div className="text-3xl">
+            Pocket<span className="text-yellow-300">Mall</span>
+          </div>
         </Link>
 
         <div className="flex items-center space-x-6 text-lg">
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="px-3 py-1 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-white w-full sm:w-auto"
-          />
-          <Link href="/products" className="hover:text-yellow-300 transition">
-            Product
+          <div className="flex items-center">
+            <FaSearch />
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="p-1 rounded-md text-white font-bold focus:outline-none focus:ring-2 focus:ring-white w-full sm:w-[165px]"
+            />
+          </div>
+          <Link
+            href="/products"
+            className="hover:text-yellow-300 transition flex gap-1 items-center"
+          >
+            <AiFillProduct /> Product
           </Link>
 
           <Link
             href="/cart"
-            className="relative hover:text-yellow-300 transition"
+            className="relative hover:text-yellow-300 transition flex gap-1 items-center"
           >
-            Cart
+            <FaCartArrowDown /> Cart
             {cart.length > 0 && (
               <span className="absolute -top-2 -right-4 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
                 {cart.length}
