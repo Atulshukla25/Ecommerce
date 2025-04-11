@@ -20,7 +20,9 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-blue-300 text-gray-800 flex flex-col">
-      <Navbar user={user} />
+      <Navbar user={user} searchQuery={""} setSearchQuery={function (value: React.SetStateAction<string>): void {
+        throw new Error("Function not implemented.");
+      } } />
 
       <main className="flex-1 flex flex-col items-center justify-center px-6 text-center py-10">
         <h1 className="text-5xl sm:text-6xl font-extrabold text-yellow-400 mb-4 drop-shadow-md animate-pulse">
