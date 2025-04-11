@@ -13,11 +13,15 @@ interface Product {
   description: string;
   price: number;
   image: string;
+  category: string;
 }
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
+
   const { user, fetchUsers, addToCart, cart } = useAuthStore();
 
   useEffect(() => {
@@ -32,11 +36,19 @@ export default function ProductsPage() {
         const data = await response.json();
         if (Array.isArray(data)) {
           setProducts(data);
+
+          // Extract unique categories
+          const uniqueCategories = Array.from(
+            new Set(data.map((p: Product) => p.category).filter(Boolean))
+          );
+          setCategories(["All", ...uniqueCategories]);
         } else {
           setProducts([]);
+          setCategories(["All"]);
         }
       } catch (error) {
         setProducts([]);
+        setCategories(["All"]);
       }
     }
 
@@ -53,9 +65,14 @@ export default function ProductsPage() {
     }
   };
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch = product.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesCategory =
+      selectedCategory === "All" || product.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-tr from-blue-100 to-blue-200 text-gray-800">
@@ -68,6 +85,36 @@ export default function ProductsPage() {
         <h1 className="text-5xl font-extrabold text-center text-blue-800 mb-8 mt-10">
           Explore Our Products
         </h1>
+
+        <div className="flex justify-center items-center gap-4 mb-8">
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            className="px-4 py-2 rounded-lg border border-blue-300 text-blue-700 bg-white shadow-sm"
+          >
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+
+          {selectedCategory !== "All" && (
+            <button
+              onClick={() => setSelectedCategory("All")}
+              className="px-4 py-2 rounded-lg bg-red-100 text-red-600 border border-red-300 hover:bg-red-200 transition-all text-sm font-medium"
+            >
+              Clear Filter
+            </button>
+          )}
+        </div>
+
+        <h2 className="text-2xl font-bold text-center text-blue-700 mb-4">
+          {selectedCategory === "All"
+            ? "All Products"
+            : `Category: ${selectedCategory}`}
+        </h2>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (

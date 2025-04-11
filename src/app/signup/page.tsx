@@ -61,7 +61,7 @@ export default function Signup() {
                 type="text"
                 {...register("name")}
                 placeholder="Alex Carry"
-                className="w-full mt-2 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 placeholder:text-gray-400"
+                className="w-full mt-2 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 placeholder:text-gray-400 text-black"
               />
               {errors.name && (
                 <p className="text-sm text-red-500 mt-1">
@@ -78,7 +78,7 @@ export default function Signup() {
                 type="email"
                 {...register("email")}
                 placeholder="alex@example.com"
-                className="w-full mt-2 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 placeholder:text-gray-400"
+                className="w-full mt-2 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 placeholder:text-gray-400 text-black"
               />
               {errors.email && (
                 <p className="text-sm text-red-500 mt-1">
@@ -97,7 +97,7 @@ export default function Signup() {
                 type="password"
                 {...register("user_password")}
                 placeholder="Create a strong password"
-                className="w-full mt-2 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 placeholder:text-gray-400"
+                className="w-full mt-2 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 placeholder:text-gray-400 text-black"
               />
               {errors.user_password && (
                 <p className="text-sm text-red-500 mt-1">

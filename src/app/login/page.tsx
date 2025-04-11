@@ -64,7 +64,7 @@ export default function LoginPage() {
               type="email"
               {...register("email")}
               placeholder="Enter your email"
-              className="w-full mt-2 px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
+              className="w-full mt-2 px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 text-black"
             />
             {errors.email && (
               <p className="text-sm text-red-500 mt-1">
@@ -81,7 +81,7 @@ export default function LoginPage() {
               type="password"
               {...register("user_password")}
               placeholder="Enter your password"
-              className="w-full mt-2 px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
+              className="w-full mt-2 px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 text-black"
             />
             {errors.user_password && (
               <p className="text-sm text-red-500 mt-1">
