@@ -34,7 +34,10 @@ export default function Navbar({
   return (
     <nav className="bg-gradient-to-r from-purple-600 to-indigo-700 text-white p-4 shadow-md fixed w-full top-0 z-50">
       <div className="container mx-auto flex flex-wrap justify-between items-center gap-4">
-        <Link href="/" className="text-2xl font-extrabold tracking-wide italic">
+        <Link
+          href="/dashboard"
+          className="text-2xl font-extrabold tracking-wide italic"
+        >
           Pocket<span className="text-yellow-300">Mall</span>
         </Link>
 

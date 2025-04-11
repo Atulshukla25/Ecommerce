@@ -37,7 +37,6 @@ export default function ProductsPage() {
         if (Array.isArray(data)) {
           setProducts(data);
 
-          // Extract unique categories
           const uniqueCategories = Array.from(
             new Set(data.map((p: Product) => p.category).filter(Boolean))
           );
