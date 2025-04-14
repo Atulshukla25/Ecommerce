@@ -101,6 +101,7 @@ const useAuthStore = create((set) => ({
       console.error("Login failed", error);
     }
   },
+  
   clearCart: () => {
     set({ cart: [] });
   },
