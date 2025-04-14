@@ -1,15 +1,14 @@
 "use client";
+import React from "react";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaUserCircle } from "react-icons/fa";
-import useAuthStore from "../store/index";
-import React from "react";
 import { AiFillProduct } from "react-icons/ai";
 import { FaCartArrowDown } from "react-icons/fa";
 import { FcShop } from "react-icons/fc";
 import { FaSearch } from "react-icons/fa";
-
+import useAuthStore from "../store/index";
 interface User {
   name: string;
   email: string;
