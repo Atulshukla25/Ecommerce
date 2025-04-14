@@ -26,7 +26,7 @@ export default function PaymentForm() {
       if (response.ok) {
         toast.success("Order placed successfully!");
         clearCart();
-        router.push("/order-success");
+        router.push("/products");
       } else {
         toast.error(data.message || "Payment failed!");
       }
